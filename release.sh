@@ -25,11 +25,11 @@ API_JSON=$(printf '{"tag_name": "%s","target_commitish": "master","name": "Versi
 
 echo commit json: $API_JSON
 
-curl --data "$API_JSON" https://api.github.com/repos/danialfarid/ng-file-upload/releases?access_token=$3
+curl --data "$API_JSON" https://api.github.com/repos/vertazzar/ng-file-upload/releases?access_token=$3
 
-curl --data "$API_JSON" https://api.github.com/repos/danialfarid/ng-file-upload-shim-bower/releases?access_token=$3
+curl --data "$API_JSON" https://api.github.com/repos/vertazzar/ng-file-upload-shim-bower/releases?access_token=$3
 
-curl --data "$API_JSON" https://api.github.com/repos/danialfarid/ng-file-upload-bower/releases?access_token=$3
+curl --data "$API_JSON" https://api.github.com/repos/vertazzar/ng-file-upload-bower/releases?access_token=$3
 
 cd ../ng-file-upload
 npm publish
