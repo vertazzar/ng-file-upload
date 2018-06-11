@@ -258,6 +258,10 @@ ngFileUpload.service('UploadBase', ['$http', '$q', '$timeout', function ($http, 
     }
 
     function addFieldToFormData(formData, val, key) {
+      if (angular.isFunction(val)) {
+        // if the val is a function, skip it
+        return;
+      }
       if (val !== undefined) {
         if (angular.isDate(val)) {
           val = val.toISOString();
