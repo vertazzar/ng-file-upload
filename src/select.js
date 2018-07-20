@@ -230,12 +230,29 @@ ngFileUpload.directive('ngfSelect', ['$parse', '$timeout', '$compile', 'Upload',
     });
 
     $timeout(function () {
-      for (var i = 0; i < generatedElems.length; i++) {
-        var g = generatedElems[i];
-        if (!document.body.contains(g.el[0])) {
-          generatedElems.splice(i, 1);
-          g.ref.remove();
-        }
+      if (window._) { // fixes minor memory leak if you have lodash, cant be arsed to write fallbacks
+
+          var items = generatedElems.concat();
+          for (var i = 0; i < items.length; i++) {
+              var g = items[i];
+              if (!document.body.contains(g.el[0])) {
+                  var item = _.find(generatedElems, function (o) {
+                    return o.el[0] === g.el[0];
+                  });
+                  if (item) {
+                    _.pull(generatedElems, item);
+                  }
+                  g.ref.remove();
+              }
+          }
+      } else { // this has a minor memory leak
+          for (var i = 0; i < generatedElems.length; i++) {
+              var g = generatedElems[i];
+              if (!document.body.contains(g.el[0])) {
+                  generatedElems.splice(i, 1); // FIXME this causes generatedElems to improperly remove items because of mutations
+                  g.ref.remove();
+              }
+          }
       }
     });
 
