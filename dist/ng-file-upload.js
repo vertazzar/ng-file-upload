@@ -926,8 +926,8 @@ ngFileUpload.directive('ngfSelect', ['$parse', '$timeout', '$compile', 'Upload',
       angular.forEach(unwatches, function (unwatch) {
         unwatch();
       });
-    });
 
+      
     $timeout(function () {
       if (window._) { // fixes minor memory leak if you have lodash, cant be arsed to write fallbacks
 
@@ -953,6 +953,9 @@ ngFileUpload.directive('ngfSelect', ['$parse', '$timeout', '$compile', 'Upload',
           }
       }
     });
+      
+    });
+
 
     if (window.FileAPI && window.FileAPI.ngfFixIE) {
       window.FileAPI.ngfFixIE(elem, fileElem, changeFn);
